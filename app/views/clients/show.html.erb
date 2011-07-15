@@ -1,0 +1,16 @@
+<table class="profile round bottom-shadow gb-gradient" summary="Profile information">
+	<tr>
+		<td class="main">
+			<h1>
+				<%= gravatar_for @client %>
+				<%= @client.first_name %> <%= @client.last_name %>
+			</h1>
+		</td>
+		<td class="sidebar sidebar-gradient">
+			<strong>Name</strong> <%= @client.first_name %> <%= @client.last_name %><br />
+			<strong>Phone</strong> <%= @client.phone %><br />
+			<strong>E-Mail</strong><span class="email"><%= mail_to @client.email %></span>
+			<strong>URL</strong> <%= link_to client_path(@client), @client %><br />
+		</td>
+	</tr>
+</table>

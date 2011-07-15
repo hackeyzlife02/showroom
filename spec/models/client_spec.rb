@@ -20,7 +20,7 @@ describe Client do
       :first_name => "Example", 
       :last_name => "Client", 
       :phone => "0123456789", 
-      :email => "Client@example.com"
+      :email => "Client@example.com",
     }
   end
   
@@ -88,4 +88,5 @@ describe Client do
       long_name_Client = Client.new(@attr.merge(:last_name => long_name))
       long_name_Client.should_not be_valid
   end
+  
 end

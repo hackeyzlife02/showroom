@@ -1,0 +1,14 @@
+<table class="profile round bottom-shadow gb-gradient" summary="Profile information">
+	<tr>
+		<td class="main">
+			<h1>
+				<%= @employee.name %>
+			</h1>
+		</td>
+		<td class="sidebar sidebar-gradient">
+			<strong>Name</strong> <%= @employee.name %><br />
+			<strong>E-Mail</strong><span class="email"><%= mail_to @employee.email %></span>
+			<strong>URL</strong> <%= link_to employee_path(@employee), @employee %><br />
+		</td>
+	</tr>
+</table>

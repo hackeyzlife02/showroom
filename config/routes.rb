@@ -1,7 +1,9 @@
 Showroom::Application.routes.draw do
+  resources :clients
+  resources :employees
   
-  get "employees/new"
-  
+  match '/addclient', :to => 'clients#new'
+
   match '/register', :to => 'employees#new'
   
   root :to => "pages#home"

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe EmployeesController do
+describe ClientsController do
   render_views
   
   describe "GET 'new'" do
@@ -12,7 +12,7 @@ describe EmployeesController do
     
     it "should have the right title" do
       get 'new'
-      response.should have_selector("title", :content => "Register")
+      response.should have_selector("title", :content => "Add Client")
     end
     
   end       #End GET new

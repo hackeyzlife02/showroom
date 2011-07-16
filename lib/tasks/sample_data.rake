@@ -14,7 +14,7 @@ namespace :db do
       :first_name => "Jimmy",
       :last_name => "Jimmerson",
       :email => "jj@example.com",
-      :phone => 4224954399
+      :phone => 42249543
     )
     25.times do |n|
       first_name = Faker::Name.first_name

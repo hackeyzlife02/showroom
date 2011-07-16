@@ -13,6 +13,7 @@ class EmployeesController < ApplicationController
   def create
     @employee = Employee.new(params[:employee])
     if @employee.save
+      sign_in @employee
       redirect_to @employee, :flash => { :success => "Welcome to the Jungle!" }
     else
       @title = "Register Employee"

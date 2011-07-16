@@ -38,6 +38,32 @@ describe "Employees" do
         end
       end       #End Registration Success
       
-    end       #End Register
-    
+  end       #End Register
+  
+  describe "sign in/out" do
+
+    describe "failure" do
+      it "should not sign an employee in" do
+        visit signin_path
+        fill_in :email,    :with => ""
+        fill_in :password, :with => ""
+        click_button
+        response.should have_selector("div.flash.error", :content => "Invalid")
+      end
+    end
+
+    describe "success" do
+      it "should sign an employee in and out" do
+        employee = Factory(:employee)
+        visit signin_path
+        fill_in "Email",    :with => employee.email
+        fill_in "Password", :with => employee.password
+        click_button
+        controller.should be_signed_in
+        click_link "Sign out"
+        controller.should_not be_signed_in
+      end
+    end
+  end
+  
 end

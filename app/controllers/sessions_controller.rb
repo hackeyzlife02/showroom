@@ -5,16 +5,16 @@ class SessionsController < ApplicationController
   end
   
   def create
-    client = Client.authenticate( params[:session][:email],
+    employee = Employee.authenticate( params[:session][:email],
                                   params[:session][:password] )
                                   
-    if client.nil?
+    if employee.nil?
       flash.now[:error] = "Invalid email/password combination"
       @title = "Sign in"
       render 'new'
     else
-      sign_in client
-      redirect_back_or client
+      sign_in employee
+      redirect_back_or employee
     end
   end
   

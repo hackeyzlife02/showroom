@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "Clients" do
+  
   describe "add client" do
 
       describe "failure" do
@@ -36,5 +37,7 @@ describe "Clients" do
           end.should change(Client, :count).by(1)
         end
       end       #End Registration Success
-    end       #End Register
+  end       #End Register
+
+  
 end

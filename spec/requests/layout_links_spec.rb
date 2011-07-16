@@ -40,4 +40,47 @@ describe "LayoutLinks" do
       click_link "Add Client"
       response.should have_selector('title', :content => "Add Client")
     end
+    
+    describe "when not signed in" do
+      it "should have a signin link" do
+        visit root_path
+        response.should have_selector("a", :href => signin_path,
+                                           :content => "Sign in")
+      end
+    end
+
+    describe "when signed in" do
+
+      before(:each) do
+        @employee = Factory(:employee)
+        visit signin_path
+        fill_in :email,    :with => @employee.email
+        fill_in :password, :with => @employee.password
+        click_button
+      end
+
+      it "should have a signout link" do
+        visit root_path
+        response.should have_selector("a", :href => signout_path,
+                                           :content => "Sign out")
+      end
+
+      it "should have a profile link" do
+        visit root_path
+        response.should have_selector("a", :href => employee_path(@employee),
+                                           :content => "Profile")
+      end
+
+      it "should have a settings link" do
+        visit root_path
+        response.should have_selector("a",  :href => edit_employee_path(@employee),
+                                            :content => "Settings")
+      end
+
+      it "should have a clients link" do
+        visit root_path
+        response.should have_selector("a",  :href => clients_path,
+                                            :content => "Clients")
+      end
+    end       #End When Signed In
 end

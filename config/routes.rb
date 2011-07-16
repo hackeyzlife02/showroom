@@ -1,6 +1,6 @@
 Showroom::Application.routes.draw do
-  resources :clients
-  resources :employees
+  resources :clients, :employees
+  resources :sessions, :only => [:new, :create, :destroy]
   
   match '/addclient', :to => 'clients#new'
 
@@ -10,6 +10,8 @@ Showroom::Application.routes.draw do
 
   match '/about',         :to => 'pages#about'
   match '/contact',       :to => 'pages#contact'
+  match '/signin',        :to => 'sessions#new'
+  match '/signout',       :to => 'sessions#destroy'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

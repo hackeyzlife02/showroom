@@ -1,4 +1,4 @@
-require 'faker'
+require 'faker/name'
 
 namespace :db do
   desc "Fill Database With Sample Data"

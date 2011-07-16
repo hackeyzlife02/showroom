@@ -1,2 +1,11 @@
-<h1>Employees#new</h1>
-<p>Find me in app/views/employees/new.html.erb</p>
+<h1>Employee Registration</h1>
+<%= render 'shared/error_messages', :person => @employee %>
+<%= form_for(@employee) do |f| %>
+
+	<%= render 'fields', :f => f %>
+	
+	<div class="actions">
+		<%= f.submit "Submit" %>
+	</div>
+
+<% end %>

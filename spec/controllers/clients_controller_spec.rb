@@ -54,4 +54,63 @@ describe ClientsController do
     end
     
   end
+
+  describe "POST 'create'" do
+    
+    describe "failure" do
+      
+      before(:each) do
+        @attr = { :first_name => "", 
+                  :last_name => "", 
+                  :email => "", 
+                  :phone => "" }
+      end
+      
+      it "should have the right title" do
+        post :create, :client => @attr
+        response.should have_selector('title', :content => "Add Client")
+      end
+      
+      it "should render the 'new' page" do
+        post :create, :client => @attr
+        response.should render_template('new')
+      end
+      
+      it "should not create client" do
+        lambda do
+          post :create, :client => @attr
+        end.should_not change(Client, :count)
+      end
+      
+    end     #end Failure
+    
+    describe "success" do
+      
+      before(:each) do
+        @attr = { :first_name => "New", 
+                  :last_name => "Client", 
+                  :email => "newclient@example.com", 
+                  :phone => "0123456789" }
+      end
+      
+      it "should create a client" do
+        lambda do
+          post :create, :client => @attr
+        end.should change(Client, :count).by(1)
+      end
+
+      it "should redirect to the client show page" do
+        post :create, :client => @attr
+        response.should redirect_to(client_path(assigns(:client)))
+      end
+      
+      it "should have a welcome message" do
+        post :create, :client => @attr
+        flash[:success].should =~ /Welcome to the Jungle!/i
+      end
+      
+    end     #end Success
+    
+  end       #end POST Create
+
 end

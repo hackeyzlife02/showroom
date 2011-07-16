@@ -4,6 +4,12 @@
 			<h1>
 				<%= @employee.name %>
 			</h1>
+			<h3>Quick Links</h3>
+			<ul>
+				<li><%= link_to "Add Client", new_client_path %></li>
+				<li><%= link_to "View All Clients", clients_path %></li>
+				<li><%= link_to "Register Employee", register_path %></li>
+			</ul>
 		</td>
 		<td class="sidebar sidebar-gradient">
 			<strong>Name</strong> <%= @employee.name %><br />

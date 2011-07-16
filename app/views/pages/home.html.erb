@@ -1,4 +1,8 @@
 <h1>Home</h1>
 <p>Well done, George.</p>
-<%= link_to "Register", register_path, :class => "signup_button round" %>
-<%= link_to "Add Client", '/addclient', :class => "signup_button round", :id => "add_client" %>
+<% if signed_in? %>
+	<%= link_to "Register Employee", register_path, :class => "signup_button round" %>
+	<%= link_to "Add Client", '/addclient', :class => "signup_button round", :id => "add_client" %>
+<% else %>
+	<%= link_to "Sign in", signin_path, :class => "signup_button round" %>
+<% end %>

@@ -1,16 +1,25 @@
 require 'spec_helper'
 
 describe "Clients" do
+  before(:each) do
+    @employee = Factory(:employee)
+    visit signin_path
+    fill_in :email,    :with => @employee.email
+    fill_in :password, :with => @employee.password
+    click_button
+  end
   
   describe "add client" do
-
+    
       describe "failure" do
-
+        
         it "should not add a new client" do
           lambda do
+            
             visit addclient_path
-            fill_in "First Name",   :with => ""
-            fill_in "Last Name",    :with => ""
+            
+            fill_in "First name",   :with => ""
+            fill_in "Last name",    :with => ""
             fill_in "Email",        :with => ""
             fill_in "Phone",        :with => ""
             click_button
@@ -22,12 +31,12 @@ describe "Clients" do
       end       #End Registration Failure
       
       describe "success" do
-
+        
         it "should add a new client" do
           lambda do
             visit addclient_path
-            fill_in "First Name",   :with => "Example"
-            fill_in "Last Name",   :with => "Client"
+            fill_in "First name",   :with => "Example"
+            fill_in "Last name",   :with => "Client"
             fill_in "Email",        :with => "client@example.com"
             fill_in "Phone",   :with => "0123456789"
             click_button

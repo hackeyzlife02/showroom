@@ -274,4 +274,46 @@ describe ClientsController do
     
   end       #End Authentication of edit/update pages
 
+  describe "DELETE 'destroy'" do
+
+      before(:each) do
+        @employee = Factory(:employee)
+        @client = Factory(:client)
+      end
+
+      describe "as a non-signed-in employee" do
+        it "should deny access" do
+          delete :destroy, :id => @client
+          response.should redirect_to(signin_path)
+        end
+      end
+
+      describe "as a non-admin employee" do
+        it "should protect the page" do
+          test_sign_in(@employee)
+          delete :destroy, :id => @client
+          response.should redirect_to(root_path)
+        end
+      end
+
+      describe "as an admin employee" do
+
+        before(:each) do
+          admin = Factory(:employee, :email => "admin@example.com", :admin => true)
+          test_sign_in(admin)
+        end
+
+        it "should destroy the client" do
+          lambda do
+            delete :destroy, :id => @client
+          end.should change(Client, :count).by(-1)
+        end
+
+        it "should redirect to the clients page" do
+          delete :destroy, :id => @client
+          response.should redirect_to(clients_path)
+        end
+      end
+    end
+
 end

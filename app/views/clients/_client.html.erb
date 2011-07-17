@@ -1,4 +1,8 @@
 <li>
 	<%= gravatar_for client, :size => 30 %>
 	<%= link_to "#{client.first_name} #{client.last_name}", client %>
+	<% if current_employee.admin? %>
+	  | <%= link_to "delete", client, :method => :delete, :confirm => "Are you sure you want to delete #{client.first_name} from the database?",
+	                                :title => "Delete #{client.first_name} #{client.last_name}" %>
+	  <% end %>
 </li>

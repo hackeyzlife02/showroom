@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
   before_filter :authenticate
-  
+  before_filter :admin_user, :only => :destroy
   def index
     @title = "All Clients"
     @clients = Client.paginate(:all, :page => params[:page], :per_page => 10)
@@ -40,4 +40,19 @@ class ClientsController < ApplicationController
       render 'edit'
     end
   end
+
+  def destroy
+    client = Client.find(params[:id])
+    fname = client.first_name
+    lname = client.last_name
+    client.destroy
+    flash[:success] = "#{fname} #{lname} successfully deleted."
+    redirect_to clients_path
+  end
+
+  private
+    def admin_user
+      redirect_to(root_path) unless current_employee.admin?
+    end
+    
 end

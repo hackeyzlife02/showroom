@@ -142,6 +142,26 @@ describe Employee do
     
   end     #end Password Encryption
   
+  describe "admin attribute" do
+
+      before(:each) do
+        @employee = Employee.create!(@attr)
+      end
+
+      it "should respond to admin" do
+        @employee.should respond_to(:admin)
+      end
+
+      it "should not be an admin by default" do
+        @employee.should_not be_admin
+      end
+
+      it "should be convertible to an admin" do
+        @employee.toggle!(:admin)
+        @employee.should be_admin
+      end
+    end
+  
 end
 
 # == Schema Information

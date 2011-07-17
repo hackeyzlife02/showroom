@@ -18,7 +18,7 @@ namespace :db do
     )
     25.times do |n|
       first_name = "Jimmy"
-      last_name = "#{n}"
+      last_name = "#{n+1}"
       phone = rand(9999999999).to_s.center(10,rand(9).to_s)
       email = "jimmy-#{n+1}@example.com"
       Client.create!(

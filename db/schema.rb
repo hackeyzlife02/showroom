@@ -16,12 +16,10 @@ ActiveRecord::Schema.define(:version => 20110717015420) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.integer  "phone"
+    t.integer  "phone",      :limit => 8
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "clients", ["email"], :name => "index_clients_on_email", :unique => true
 
   create_table "employees", :force => true do |t|
     t.string   "name"

@@ -1,15 +1,15 @@
-require 'faker/name'
 
 namespace :db do
   desc "Fill Database With Sample Data"
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
-    Employee.create!(
+    admin = Employee.create!(
       :name => "lutzdmin",
       :email => "admin@lutzplumbingonline.com",
       :password => "admin29",
       :password_confirmation => "admin29"
     )
+    admin.toggle!(:admin)
     Client.create!(
       :first_name => "Jimmy",
       :last_name => "Jimmerson",
@@ -17,9 +17,9 @@ namespace :db do
       :phone => 42249543
     )
     25.times do |n|
-      first_name = Faker::Name.first_name
-      last_name = Faker::Name.last_name
-      phone = Faker::PhoneNumber.phone_number
+      first_name = "Jimmy"
+      last_name = "#{n}"
+      phone = rand(9999999999).to_s.center(10,rand(9).to_s)
       email = "jimmy-#{n+1}@example.com"
       Client.create!(
         :first_name => first_name,

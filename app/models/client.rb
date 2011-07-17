@@ -25,7 +25,8 @@ class Client < ActiveRecord::Base
   validates :last_name,   :presence => true,
                           :length => { :maximum => 50 }
   
-  validates :phone,       :presence => true
+  validates :phone,       :presence => true,
+                          :length => { :maximum => 10 }
   
   validates :email,       :presence => true,
                           :format => { :with => email_regex },

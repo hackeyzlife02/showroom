@@ -10,7 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110717015420) do
+ActiveRecord::Schema.define(:version => 20110717024601) do
+
+  create_table "client_addrs", :force => true do |t|
+    t.string   "title"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "client_addrs", ["client_id"], :name => "index_client_addrs_on_client_id"
+  add_index "client_addrs", ["created_at"], :name => "index_client_addrs_on_created_at"
 
   create_table "clients", :force => true do |t|
     t.string   "first_name"
@@ -32,5 +46,29 @@ ActiveRecord::Schema.define(:version => 20110717015420) do
   end
 
   add_index "employees", ["email"], :name => "index_employees_on_email", :unique => true
+
+  create_table "quote_items", :force => true do |t|
+    t.string   "item_num"
+    t.string   "description"
+    t.integer  "qty"
+    t.decimal  "price",       :precision => 8, :scale => 2
+    t.string   "notes"
+    t.integer  "quote_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "quote_items", ["quote_id"], :name => "index_quote_items_on_quote_id"
+
+  create_table "quotes", :force => true do |t|
+    t.string   "title"
+    t.string   "notes"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "quotes", ["client_id"], :name => "index_quotes_on_client_id"
+  add_index "quotes", ["created_at"], :name => "index_quotes_on_created_at"
 
 end

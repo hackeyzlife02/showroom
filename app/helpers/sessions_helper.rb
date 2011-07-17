@@ -5,6 +5,10 @@ module SessionsHelper
     self.current_employee = employee
   end
   
+  def store_client(client)
+    open_account client if !client.nil?
+  end
+  
   def current_employee=(employee)
     @current_employee = employee
   end
@@ -13,12 +17,26 @@ module SessionsHelper
     @current_employee ||= employee_from_track_token
   end
   
+  def account_open?
+    !client_account.nil?
+  end
+  
+  def client_account=(client)
+    @client_account = client
+  end
+  
+  def client_account
+    @client_account || Client.find(cookies[:client_account]) if !cookies[:client_account].nil?
+  end
+  
   def signed_in?
     !current_employee.nil?
   end
   
   def sign_out
     cookies.delete(:track_token)
+    cookies.delete(:client_account)
+    self.client_account = nil
     self.current_employee = nil
   end
   
@@ -38,6 +56,11 @@ module SessionsHelper
   def redirect_back_or(default)
     redirect_to(session[:return_to] || default)
     clear_return_to
+  end
+  
+  def open_account(client)
+    cookies.permanent[:client_account] = client.id
+    self.client_account = client
   end
   
   private

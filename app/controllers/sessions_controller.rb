@@ -7,13 +7,14 @@ class SessionsController < ApplicationController
   def create
     employee = Employee.authenticate( params[:session][:email],
                                   params[:session][:password] )
-                                  
+    
     if employee.nil?
       flash.now[:error] = "Invalid email/password combination"
       @title = "Sign in"
       render 'new'
     else
       sign_in employee
+      store_client nil
       redirect_back_or employee
     end
   end

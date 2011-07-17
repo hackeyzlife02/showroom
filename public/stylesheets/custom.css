@@ -8,6 +8,8 @@ body {
 
 header {
 	padding-top: 20px;
+	padding-bottom: 20px;
+	clear:both;
 }
 
 header img {
@@ -20,6 +22,13 @@ section {
 	font-size: 120%;
 	padding: 20px;
 	background: #fff;
+}
+
+section.notifications {
+	margin-top: .4em;
+	font-size: 120%;
+	padding: 20px;
+	background: #000;
 }
 
 .red {
@@ -126,6 +135,41 @@ a.signup_button {
 	font-size: 150%;
 	font-weight: bold;
 	padding: 20px;
+}
+
+a.account_button {
+	display:inline;
+	text-align:center;
+	width: 120px;
+	color: #000;
+	font-size: 1.3em;
+	font-weight: bold;
+	padding: 5px 15px 5px 15px;
+	margin:auto;
+}
+
+.open {
+	background: #80a848;
+	border: 1px solid #324422;
+}
+
+.closed {
+	background: #bc9b92;
+	border: 1px solid #5f000d;
+}
+
+span.account_status {
+	font-size:1.2em;
+	margin-bottom:3px;
+	margin-left:5px;
+}
+
+.open_status {
+	color: #486030;
+}
+
+.closed_status {
+	color: #c3000c;
 }
 
 /* Round Corners */

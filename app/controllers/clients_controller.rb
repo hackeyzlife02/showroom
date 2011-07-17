@@ -8,6 +8,10 @@ class ClientsController < ApplicationController
   
   def show
     @client = Client.find(params[:id])
+    store_client @client
+    @client_addrs = @client.client_addrs
+    @client_addr = @client.client_addrs.first
+    @quotes = @client.quotes.paginate(:page => params[:page], :per_page => 5)
     @title = @client.first_name + " " + @client.last_name
   end
   
@@ -28,11 +32,14 @@ class ClientsController < ApplicationController
 
   def edit
     @client = Client.find(params[:id])
+    @client_addrs = @client.client_addrs.all
+    @client_addr = @client.client_addrs.find_by_id(1) unless @client_addrs.nil?
     @title = "Edit Client"
   end
 
   def update
     @client = Client.find(params[:id])
+    @client_addrs = @client.client_addrs
     if @client.update_attributes(params[:client])
       redirect_to @client, :flash => { :success => "Client Profile Updated!" }
     else

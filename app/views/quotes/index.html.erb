@@ -1,0 +1,10 @@
+<%= hidden_field_tag(:client, @client) %>
+<h1>All Quotes</h1>
+
+<%= will_paginate @quotes %>
+
+<ul class="clients">
+	<%= render @quotes %>
+</ul>
+
+<%= will_paginate @quotes %>

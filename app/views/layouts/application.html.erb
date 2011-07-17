@@ -9,6 +9,17 @@
   <body>
 	<div class="container">
 		<%= render 'layouts/header' %>
+		<section class="round shadow notifications">
+			<% if account_open? %>
+				<span class="account_status open_status">Open Client Account</span>
+				<%= link_to "#{client_account.first_name} #{client_account.last_name}", client_account, 
+															:class => "account_button round open" %>
+			<% else %>
+				<span class="account_status closed_status">No Open Account</span>
+				<%= link_to "Select Client", clients_path, 
+															:class => "account_button round closed" %>
+			<% end %>
+		</section>
 		<section class="round shadow">
     	<% flash.each do |key, value| %>
 			<div class="flash <%= key %>"><%= value %></div>

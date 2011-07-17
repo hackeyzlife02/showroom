@@ -1,0 +1,12 @@
+<%= hidden_field_tag(:client, @client) %>
+<h1>New Quote</h1>
+<%= render 'shared/error_messages', :person => @client %>
+<%= form_for(@quote) do |f| %>
+
+	<%= render 'fields', :f => f %>
+	
+	<div class="actions">
+		<%= f.submit "Save Quote" %>
+	</div>
+
+<% end %>

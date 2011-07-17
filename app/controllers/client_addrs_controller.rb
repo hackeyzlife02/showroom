@@ -12,7 +12,7 @@ class ClientAddrsController < ApplicationController
     @client_addr = @client.client_addrs.build(params[:client_addr])
     if @client_addr.save
       flash[:success] = "Added Address for the Client"
-      redirect_to edit_client_path(current_client)
+      redirect_to client_account
     else
       @title = "Sign Up"
       render 'new'
@@ -37,6 +37,9 @@ class ClientAddrsController < ApplicationController
   end
   
   def destroy
-    redirect_to signin_path
+    @client = client_account
+    @client_addr = @client.client_addrs.find_by_id(params[:id])
+    @client_addr.destroy
+    redirect_to @client
   end
 end

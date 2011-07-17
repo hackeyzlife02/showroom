@@ -1,11 +1,16 @@
 <%= hidden_field_tag(:client, @client) %>
-<h1><%= @quote.title %></h1>
+<%= link_to "Back to Client's Profile", @client %>
+<div class="separator"></div>
+<%= form_for @quote do |f| %>
+	<%= render 'fields', :f => f %>
+<% end %>
 <h3>Client: <%= @client.first_name %> <%= @client.last_name %></h3>
 <h4>Total: <%= number_to_currency(@quote.total) %></h4>
-<%= link_to "Back to Client's Profile", @client %>
+
 <table class="quote_items">
 	<%= form_for @quote_item do |f| %>
 		<%= render 'quote_items/fields', :f => f, :quote => @quote, :person => @client %>
+		<%= f.submit "Update" %>
 	<% end %>
 </table>
 

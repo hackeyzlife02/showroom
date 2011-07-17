@@ -25,7 +25,7 @@ class QuotesController < ApplicationController
     @quote = Quote.find(params[:id])
     @quote_items = @quote.quote_items.paginate(:page => params[:page], :per_page => 10)
     @client = @quote.client
-    @title = @quote.qtitle
+    @title = @quote.title
   end
 
   def create

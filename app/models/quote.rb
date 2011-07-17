@@ -10,8 +10,7 @@ class Quote < ActiveRecord::Base
   validates :title,  :presence => true,
                       :length => { :maximum => 45 }
   
-  validates :notes,  :presence => true,
-                      :length => { :maximum => 120 }
+  validates :notes,  :length => { :maximum => 120 }
 
   validates :client_id, :presence => true
   

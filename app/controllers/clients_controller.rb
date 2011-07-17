@@ -32,6 +32,7 @@ class ClientsController < ApplicationController
 
   def edit
     @client = Client.find(params[:id])
+    store_client @client
     @client_addrs = @client.client_addrs.all
     @client_addr = @client.client_addrs.find_by_id(1) unless @client_addrs.nil?
     @title = "Edit Client"

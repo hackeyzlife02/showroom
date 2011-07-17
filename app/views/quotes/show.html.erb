@@ -1,4 +1,4 @@
-<h1><%= @quote.qtitle %></h1>
+<%= render @quote %>
 <h3>Client: <%= @client.first_name %> <%= @client.last_name %></h3>
 <%= link_to "Back to Client's Profile", @client %>
 <% if @quote.quote_items.any? %>
